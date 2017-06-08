@@ -5,6 +5,7 @@ from torch.autograd import Variable
 import random
 from preprocess import *
 from model import *
+from model_state import *
 
 USE_CUDA = False
 
@@ -64,8 +65,5 @@ def evaluate_randomly():
     print('')
 
 
-# Initialize models
-encoder = torch.load('checkpoints/encoder-{}'.format(1000))
-decoder = torch.load('checkpoints/decoder-{}'.format(1000))
-
+encoder, decoder = get_model()
 evaluate_randomly()

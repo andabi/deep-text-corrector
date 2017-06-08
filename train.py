@@ -8,11 +8,34 @@ import sconce
 import torch.optim
 from utils import *
 from preprocess import *
+from model_state import *
 
 USE_CUDA = False
 
+final_steps = 50000
+plot_every = 200
+print_every = 100
+save_every = 1000
+learning_rate = 0.0001
 teacher_forcing_ratio = 0.5
 clip = 5.0
+
+job = sconce.Job('seq2seq-translate', {
+    'attn_model': attn_model,
+    'n_layers': n_layers,
+    'dropout_p': dropout_p,
+    'hidden_size': hidden_size,
+    'learning_rate': learning_rate,
+    'teacher_forcing_ratio': teacher_forcing_ratio,
+})
+job.plot_every = plot_every
+job.log_every = print_every
+
+# Keep track of time elapsed and running averages
+start = time.time()
+plot_losses = []
+print_loss_total = 0 # Reset every print_every
+plot_loss_total = 0 # Reset every plot_every
 
 
 def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion):
@@ -77,48 +100,15 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
     return loss.data[0] / target_length
 
 
-
-# Initialize models
-encoder = EncoderRNN(input_lang.n_words, hidden_size, n_layers)
-decoder = AttnDecoderRNN(attn_model, hidden_size, output_lang.n_words, n_layers, dropout_p=dropout_p)
-
-# Move models to GPU
-if USE_CUDA:
-    encoder.cuda()
-    decoder.cuda()
-
-# Initialize optimizers and criterion
-learning_rate = 0.0001
-encoder_optimizer = optim.Adam(encoder.parameters(), lr=learning_rate)
-decoder_optimizer = optim.Adam(decoder.parameters(), lr=learning_rate)
+state = load_state()
+step = 1
+if state:
+    step = state['step'] + 1
+encoder, decoder = get_model(state=state)
+encoder_optimizer, decoder_optimizer = get_optimizer(encoder, decoder, lr=learning_rate, state=state)
 criterion = nn.NLLLoss()
 
-
-# Configuring training
-n_epochs = 50000
-plot_every = 200
-print_every = 100
-save_every = 100
-
-job = sconce.Job('seq2seq-translate', {
-    'attn_model': attn_model,
-    'n_layers': n_layers,
-    'dropout_p': dropout_p,
-    'hidden_size': hidden_size,
-    'learning_rate': learning_rate,
-    'teacher_forcing_ratio': teacher_forcing_ratio,
-})
-job.plot_every = plot_every
-job.log_every = print_every
-
-# Keep track of time elapsed and running averages
-start = time.time()
-plot_losses = []
-print_loss_total = 0 # Reset every print_every
-plot_loss_total = 0 # Reset every plot_every
-
-# Begin!
-for epoch in range(1, n_epochs + 1):
+for step in range(step, final_steps + 1):
 
     # Get training data for this cycle
     training_pair = variables_from_pair(random.choice(pairs))
@@ -131,24 +121,23 @@ for epoch in range(1, n_epochs + 1):
     # Keep track of loss
     print_loss_total += loss
     plot_loss_total += loss
-    job.record(epoch, loss)
+    job.record(step, loss)
 
-    if epoch == 0: continue
+    if step == 0: continue
 
-    if epoch % print_every == 0:
+    if step % print_every == 0:
         print_loss_avg = print_loss_total / print_every
         print_loss_total = 0
-        print_summary = '%s (%d %d%%) %.4f' % (
-        time_since(start, 1. * epoch / n_epochs), epoch, epoch / n_epochs * 100, print_loss_avg)
+        print_summary = '%s: %s (%d %d%%) %.4f' % (step,
+                                                   time_since(start, 1. * step / final_steps), step, step / final_steps * 100, print_loss_avg)
         print(print_summary)
 
-    if epoch % plot_every == 0:
+    if step % plot_every == 0:
         plot_loss_avg = plot_loss_total / plot_every
         plot_losses.append(plot_loss_avg)
         plot_loss_total = 0
 
-    if epoch % save_every == 0:
-        torch.save(encoder, 'checkpoints/encoder-{}'.format(epoch))
-        torch.save(decoder, 'checkpoints/decoder-{}'.format(epoch))
+    if step % save_every == 0:
+        save_state(encoder, decoder, encoder_optimizer, decoder_optimizer, step)
 
 show_plot(plot_losses)

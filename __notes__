@@ -1,5 +1,6 @@
+nucle로 해보기 (기존꺼 참고)
+
 minibatch 적용
     batch로 하면 batch 내에서는 seq length가 고정되지 않나?
-
 CUDA_USE config로 빼기
-checkpoint, saver
+visualizing attn
