@@ -23,19 +23,22 @@ class EncoderRNN(nn.Module):
         self.n_layers = n_layers
 
         self.embedding = nn.Embedding(input_size, hidden_size)
-        self.gru = nn.GRU(hidden_size, hidden_size, n_layers)
+        self.gru = nn.GRU(input_size, hidden_size, n_layers, batch_first=True)
+
+    def init_hidden(self, batch_size=10):
+        hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_size))
+        if USE_CUDA: hidden = hidden.cuda()
+        return hidden
 
     def forward(self, word_inputs, hidden):
         # Note: we run this all at once (over the whole input sequence)
-        seq_len = len(word_inputs)
-        embedded = self.embedding(word_inputs).view(seq_len, 1, -1)
+        batch_size = len(word_inputs)
+        seq_len = len(word_inputs[0])
+        embedded = self.embedding(word_inputs).view(batch_size, seq_len, -1)
+        print embedded.size()
+        print hidden.size()
         output, hidden = self.gru(embedded, hidden)
         return output, hidden
-
-    def init_hidden(self):
-        hidden = Variable(torch.zeros(self.n_layers, 1, self.hidden_size))
-        if USE_CUDA: hidden = hidden.cuda()
-        return hidden
 
 
 class AttnDecoderRNN(nn.Module):

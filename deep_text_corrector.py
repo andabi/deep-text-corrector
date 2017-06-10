@@ -1,7 +1,8 @@
 import glob
 import os
-from model import *
-from preprocess import *
+from seq2seq import *
+from preprocess import corpus
+import torch.optim as optim
 
 
 def save_state(encoder, decoder, encoder_optim, decoder_optim, step, path='checkpoints/model'):
@@ -28,8 +29,8 @@ def load_state(step=None, path='checkpoints/model'):
 
 
 def get_model(step=None, state=None):
-    encoder = EncoderRNN(input_lang.n_words, hidden_size, n_layers)
-    decoder = AttnDecoderRNN(attn_model, hidden_size, output_lang.n_words, n_layers, dropout_p=dropout_p)
+    encoder = EncoderRNN(corpus.dict.n_words, hidden_size, n_layers)
+    decoder = AttnDecoderRNN(attn_model, hidden_size, corpus.dict.n_words, n_layers, dropout_p=dropout_p)
     if USE_CUDA:
         encoder.cuda()
         decoder.cuda()
@@ -54,18 +55,3 @@ def get_optimizer(encoder, decoder, step=None, state=None, lr=0.0001):
         decoder_optimizer.load_state_dict(state['decoder_optim'])
 
     return encoder_optimizer, decoder_optimizer
-
-# def load_or_create_optimizer(step=None, path='checkpoints/model'):
-#     file_list = glob.glob(path + '*')
-#     if file_list:
-#         if step:
-#             filename = path + '-' + str(step)
-#         else:
-#             filename = max(file_list, key=os.path.getctime)
-#
-#         model = torch.load(filename)
-#         encoder_optim = model['encoder_optim'].load_state_dict()
-#         decoder_optim = model['decoder_optim'].load_state_dict()
-#     else:
-#         encoder_optim, decoder_optim = create_optimizer(load_state())
-#     return encoder_optim, decoder_optim
