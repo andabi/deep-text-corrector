@@ -3,18 +3,20 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 import random
-from model import *
+from seq2seq import *
 import sconce
 import torch.optim
 from utils import *
-from preprocess import *
-from model_state import *
+from preprocess import corpus
+from deep_text_corrector import *
+from torch.nn.utils.rnn import pad_packed_sequence as unpack
+from torch.nn.utils.rnn import pack_padded_sequence as pack
 
 USE_CUDA = False
 
 final_steps = 50000
 plot_every = 200
-print_every = 100
+print_every = 1
 save_every = 1000
 learning_rate = 0.0001
 teacher_forcing_ratio = 0.5
@@ -34,8 +36,8 @@ job.log_every = print_every
 # Keep track of time elapsed and running averages
 start = time.time()
 plot_losses = []
-print_loss_total = 0 # Reset every print_every
-plot_loss_total = 0 # Reset every plot_every
+print_loss_total = 0  # Reset every print_every
+plot_loss_total = 0  # Reset every plot_every
 
 
 def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion):
@@ -45,50 +47,50 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
     loss = 0  # Added onto for each word
 
     # Get size of input and target sentences
-    input_length = input_variable.size()[0]
-    target_length = target_variable.size()[0]
+    batch_size, input_length = input_variable.size()
+    batch_size, target_length = target_variable.size()
 
     # Run words through encoder
     encoder_hidden = encoder.init_hidden()
     encoder_outputs, encoder_hidden = encoder(input_variable, encoder_hidden)
 
     # Prepare input and output variables
-    decoder_input = Variable(torch.LongTensor([[SOS_token]]))
-    decoder_context = Variable(torch.zeros(1, decoder.hidden_size))
+
+    decoder_input = Variable(torch.LongTensor([[SOS_token] for _ in range(batch_size)]))
+    decoder_context = Variable(torch.zeros(batch_size, decoder.hidden_size))
     decoder_hidden = encoder_hidden  # Use last hidden state from encoder to start decoder
     if USE_CUDA:
         decoder_input = decoder_input.cuda()
         decoder_context = decoder_context.cuda()
 
     # Choose whether to use teacher forcing
-    use_teacher_forcing = random.random() < teacher_forcing_ratio
-    if use_teacher_forcing:
-
+    if random.random() < teacher_forcing_ratio:
         # Teacher forcing: Use the ground-truth target as the next input
         for di in range(target_length):
             decoder_output, decoder_context, decoder_hidden, decoder_attention = decoder(decoder_input, decoder_context,
                                                                                          decoder_hidden,
                                                                                          encoder_outputs)
-            loss += criterion(decoder_output[0], target_variable[di])
-            decoder_input = target_variable[di]  # Next target is next input
+            loss += criterion(decoder_output, target_variable[:, di])
 
+            decoder_input = target_variable[:, di].unsqueeze(1)  # Next target is next input
     else:
-        # Without teacher forcing: use network's own prediction as the next input
         for di in range(target_length):
             decoder_output, decoder_context, decoder_hidden, decoder_attention = decoder(decoder_input, decoder_context,
                                                                                          decoder_hidden,
                                                                                          encoder_outputs)
-            loss += criterion(decoder_output[0], target_variable[di])
+            loss += criterion(decoder_output, target_variable[:, di])
 
             # Get most likely word index (highest value) from output
-            topv, topi = decoder_output.data.topk(1)
-            ni = topi[0][0]
-
-            decoder_input = Variable(torch.LongTensor([[ni]]))  # Chosen word is next input
+            _, top_index = decoder_output.data.topk(1)
+            ni = top_index
+            # print ni, top_index.size()
+            decoder_input = Variable(
+                torch.LongTensor(ni))  # Chosen word is next input
             if USE_CUDA: decoder_input = decoder_input.cuda()
 
             # Stop at end of sentence (not necessary when using known targets)
-            if ni == EOS_token: break
+            # TODO
+            # if ni == EOS_token: break
 
     # Backpropagation
     loss.backward()
@@ -111,9 +113,14 @@ criterion = nn.NLLLoss()
 for step in range(step, final_steps + 1):
 
     # Get training data for this cycle
-    training_pair = variables_from_pair(random.choice(pairs))
-    input_variable = training_pair[0]
-    target_variable = training_pair[1]
+    inputs, targets = corpus.next_batch()
+    # n_inputs = map(lambda s: len(s), inputs)
+    input_variable = Variable(torch.LongTensor(inputs))
+    target_variable = Variable(torch.LongTensor(targets))
+
+    if USE_CUDA:
+        input_variable = input_variable.cuda()
+        target_variable = target_variable.cuda()
 
     # Run the train function
     loss = train(input_variable, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion)
@@ -132,12 +139,12 @@ for step in range(step, final_steps + 1):
                                                    time_since(start, 1. * step / final_steps), step, step / final_steps * 100, print_loss_avg)
         print(print_summary)
 
-    if step % plot_every == 0:
-        plot_loss_avg = plot_loss_total / plot_every
-        plot_losses.append(plot_loss_avg)
-        plot_loss_total = 0
+    # if step % plot_every == 0:
+    #     plot_loss_avg = plot_loss_total / plot_every
+    #     plot_losses.append(plot_loss_avg)
+    #     plot_loss_total = 0
 
     if step % save_every == 0:
         save_state(encoder, decoder, encoder_optimizer, decoder_optimizer, step)
 
-show_plot(plot_losses)
+# show_plot(plot_losses)

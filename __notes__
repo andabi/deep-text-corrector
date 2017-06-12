@@ -1,6 +1,17 @@
-nucle로 해보기 (기존꺼 참고)
+minibatch 적용(대공사 예상)
+pack, unpack
+- seq2seq에 적용 가능하나? pack시 정렬하는 문제 때문에.
+accuracy
 
-minibatch 적용
-    batch로 하면 batch 내에서는 seq length가 고정되지 않나?
+dataset
+ - nucle
+ - lang8
+
+ approach
+ - char-level
+ - word-level
+
+---
 CUDA_USE config로 빼기
 visualizing attn
+beam search

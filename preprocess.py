@@ -31,7 +31,7 @@ class WordDict:
 
 
 class Corpus:
-    def __init__(self, path='./data/corpus.txt', max_length=150):
+    def __init__(self, path='./data/corpus.txt', max_length=50):
         self.lines = open(path).read().strip().split('\n')
         self.pairs = [[s for s in l.split('\t')] for l in self.lines]
         self.dict = WordDict()

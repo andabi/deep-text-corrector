@@ -1,4 +1,4 @@
-from model import *
+from seq2seq import *
 
 encoder_test = EncoderRNN(10, 10, 2)
 decoder_test = AttnDecoderRNN('general', 10, 10, 2)
