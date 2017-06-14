@@ -27,6 +27,7 @@ class EncoderRNN(nn.Module):
 
     def init_hidden(self, batch_size=10):
         hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_size))
+
         if USE_CUDA: hidden = hidden.cuda()
         return hidden
 
@@ -74,10 +75,12 @@ class AttnDecoderRNN(nn.Module):
         attn_weights = self.attn(rnn_output, encoder_outputs)
         context = attn_weights.unsqueeze(1).bmm(encoder_outputs).squeeze(1)  # B x H
 
+        # TODO tanh?
         # Final output layer (next word prediction) using the RNN hidden state and context vector
-        output = F.log_softmax(self.out(torch.cat((rnn_output, context), -1)))  # B x V
+        output = self.out(torch.cat((rnn_output, context), -1))  # B x V
 
         # Return final output, hidden state, and attention weights (for visualization)
+        # output.size() = (B, V)
         return output, context, hidden, attn_weights
 
 

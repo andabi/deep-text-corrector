@@ -1,6 +1,7 @@
-minibatch 적용(대공사 예상)
+loss masking
 pack, unpack
 - seq2seq에 적용 가능하나? pack시 정렬하는 문제 때문에.
+- 결국 bucketting?
 accuracy
 
 dataset
@@ -13,5 +14,14 @@ dataset
 
 ---
 CUDA_USE config로 빼기
+cuda() 자동으로
 visualizing attn
 beam search
+
+---
+pytorch
+=> 더 편하게 쓸 수 있도록 더 개발되어야 한다.
+- 손이 많이 간다. gpu사용하려면 cuda() 붙어야 한다. model save/load할때 불편하다.
+- api가 확장성이 떨어진다. tensor의 shape가 특정 형태로 고정되어 있어야만 한다거나..
+
+=> dynamic graph definition 이게 거의 유일한 장점인듯

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -40,28 +42,73 @@ print_loss_total = 0  # Reset every print_every
 plot_loss_total = 0  # Reset every plot_every
 
 
-def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion):
+# outputs: (B, S, V)
+# targets: (B, S, V)
+# lengths: (B, 1)
+
+def sequence_mask(sequence_length, max_len=None):
+    if max_len is None:
+        max_len = sequence_length.data.max()
+    batch_size = sequence_length.size(0)
+    seq_range = torch.range(0, max_len - 1).long()
+    seq_range_expand = seq_range.unsqueeze(0).expand(batch_size, max_len)
+    seq_range_expand = Variable(seq_range_expand)
+    if sequence_length.is_cuda:
+        seq_range_expand = seq_range_expand.cuda()
+    seq_length_expand = (sequence_length.unsqueeze(1)
+                         .expand_as(seq_range_expand))
+    return seq_range_expand < seq_length_expand
+
+
+def masked_cross_entropy(logits, targets, lengths):
+    batch_size, seq_len, n_classes = logits.size()
+    assert (batch_size, seq_len) == targets.size()
+
+    # mask = Variable(torch.LongTensor([[1 for _ in range(l)] for l in lengths.data]))
+    # mask = mask.resize_as(targets)
+    mask = sequence_mask(sequence_length=lengths, max_len=targets.size(1))
+
+    # logits_flat: (batch * max_len, num_classes)
+    logits_flat = logits.view(-1, logits.size(-1))
+    # log_probs_flat: (batch * max_len, num_classes)
+    log_probs_flat = F.log_softmax(logits_flat)
+    # target_flat: (batch * max_len, 1)
+    target_flat = targets.view(-1, 1)
+    # losses_flat: (batch * max_len, 1)
+    losses_flat = -torch.gather(log_probs_flat, dim=1, index=target_flat)
+    # losses: (batch, max_len)
+    losses = losses_flat.view(*targets.size()) * mask.float()
+    return losses.sum() / lengths.float().sum()
+
+
+def train(input_batch, target_batch, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion):
     # Zero gradients of both optimizers
     encoder_optimizer.zero_grad()
     decoder_optimizer.zero_grad()
     loss = 0  # Added onto for each word
 
     # Get size of input and target sentences
-    batch_size, input_length = input_variable.size()
-    batch_size, target_length = target_variable.size()
+    # batch_size, input_length = input_batch.size()
+    batch_size, target_length = target_batch.size()
+
+    # TODO parameter를 paddingsequence로 받게끔 하고 아래는 삭제
+    length_targets = Variable(torch.LongTensor(map(lambda s: len(s), target_batch)))
 
     # Run words through encoder
     encoder_hidden = encoder.init_hidden()
-    encoder_outputs, encoder_hidden = encoder(input_variable, encoder_hidden)
+    encoder_outputs, encoder_hidden = encoder(input_batch, encoder_hidden)
 
     # Prepare input and output variables
 
     decoder_input = Variable(torch.LongTensor([[SOS_token] for _ in range(batch_size)]))
     decoder_context = Variable(torch.zeros(batch_size, decoder.hidden_size))
     decoder_hidden = encoder_hidden  # Use last hidden state from encoder to start decoder
+    decoder_outputs = Variable(torch.FloatTensor(batch_size, target_length, decoder.output_size).zero_())
+
     if USE_CUDA:
         decoder_input = decoder_input.cuda()
         decoder_context = decoder_context.cuda()
+        decoder_outputs = decoder_outputs.cuda()
 
     # Choose whether to use teacher forcing
     if random.random() < teacher_forcing_ratio:
@@ -70,27 +117,24 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
             decoder_output, decoder_context, decoder_hidden, decoder_attention = decoder(decoder_input, decoder_context,
                                                                                          decoder_hidden,
                                                                                          encoder_outputs)
-            loss += criterion(decoder_output, target_variable[:, di])
-
-            decoder_input = target_variable[:, di].unsqueeze(1)  # Next target is next input
+            decoder_outputs[:, di] = decoder_output
+            decoder_input = target_batch[:, di].unsqueeze(1)  # Next target is next input
     else:
         for di in range(target_length):
             decoder_output, decoder_context, decoder_hidden, decoder_attention = decoder(decoder_input, decoder_context,
                                                                                          decoder_hidden,
                                                                                          encoder_outputs)
-            loss += criterion(decoder_output, target_variable[:, di])
-
+            decoder_outputs[:, di] = decoder_output
             # Get most likely word index (highest value) from output
             _, top_index = decoder_output.data.topk(1)
-            ni = top_index
-            # print ni, top_index.size()
-            decoder_input = Variable(
-                torch.LongTensor(ni))  # Chosen word is next input
+            decoder_input = Variable(torch.LongTensor(top_index))  # Chosen word is next input
             if USE_CUDA: decoder_input = decoder_input.cuda()
 
             # Stop at end of sentence (not necessary when using known targets)
             # TODO
             # if ni == EOS_token: break
+
+    loss = masked_cross_entropy(decoder_outputs, target_batch, length_targets)
 
     # Backpropagation
     loss.backward()
@@ -114,7 +158,6 @@ for step in range(step, final_steps + 1):
 
     # Get training data for this cycle
     inputs, targets = corpus.next_batch()
-    # n_inputs = map(lambda s: len(s), inputs)
     input_variable = Variable(torch.LongTensor(inputs))
     target_variable = Variable(torch.LongTensor(targets))
 
