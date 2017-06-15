@@ -48,7 +48,8 @@ def make_annotation_list():
         nid1, pid1, sid1, start_token1, end_token1, type1, correction1 = nid2, pid2, sid2, start_token2, end_token2, type2, correction2
     
     return filtered
-     
+
+
 def build_corpus():
     anns = make_annotation_list()
     ann = anns.pop(0)

@@ -1,8 +1,10 @@
 import glob
 import os
-from seq2seq import *
-from preprocess import corpus
+
 import torch.optim as optim
+
+from preprocess import corpus
+from seq2seq.seq2seq import *
 
 
 def save_state(encoder, decoder, encoder_optim, decoder_optim, step, path='checkpoints/model'):

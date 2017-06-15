@@ -1,7 +1,5 @@
 import math
 import time
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 
 
 def as_minutes(s):

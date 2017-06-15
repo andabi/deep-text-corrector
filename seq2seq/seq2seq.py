@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 
-USE_CUDA = False
+USE_CUDA = True
 
 attn_model = 'general'
 hidden_size = 500
@@ -25,9 +25,8 @@ class EncoderRNN(nn.Module):
         self.embedding = nn.Embedding(input_size, hidden_size)
         self.gru = nn.GRU(hidden_size, hidden_size, n_layers, batch_first=True)
 
-    def init_hidden(self, batch_size=10):
+    def init_hidden(self, batch_size):
         hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_size))
-
         if USE_CUDA: hidden = hidden.cuda()
         return hidden
 
