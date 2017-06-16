@@ -4,8 +4,6 @@ import random
 import numpy as np
 from config import Config
 
-USE_CUDA = True
-
 PAD_token = 0
 SOS_token = 1
 EOS_token = 2
@@ -45,8 +43,9 @@ class Corpus:
     def sentence_to_indexes(self, sentence, max_length):
         indexes = [self.dict.word2index[word] for word in sentence.split(' ')]
         indexes.append(EOS_token)
+        n_indexes = len(indexes)
         indexes.extend([PAD_token for _ in range(max_length - len(indexes))])
-        return indexes
+        return indexes, n_indexes
 
     def indexes_to_sentence(self, indexes):
         indexes = filter(lambda i: i != PAD_token, indexes)
@@ -55,9 +54,13 @@ class Corpus:
 
     def next_batch(self, batch_size=100):
         pairs = np.array(random.sample(self.pairs, batch_size))
-        # inputs, targets = pairs[:, 0], pairs[:, 1]
-        input_indexes = [self.sentence_to_indexes(s, self.max_length) for s in pairs[:, 0]]
-        targets_indexes = [self.sentence_to_indexes(s, self.max_length) for s in pairs[:, 1]]
-        return input_indexes, targets_indexes
+        input_lens = [self.sentence_to_indexes(s, self.max_length) for s in pairs[:, 0]]
+        target_lens = [self.sentence_to_indexes(s, self.max_length) for s in pairs[:, 1]]
+        input_lens, target_lens = zip(*sorted(zip(input_lens, target_lens), key=lambda p: p[0][1], reverse=True))
+        inputs = map(lambda i: i[0], input_lens)
+        len_inputs = map(lambda i: i[1], input_lens)
+        targets = map(lambda i: i[0], target_lens)
+        len_targets = map(lambda i: i[1], target_lens)
+        return inputs, targets, len_inputs, len_targets
 
 corpus = Corpus(Config.max_seq_length)

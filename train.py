@@ -9,7 +9,7 @@ from torch.nn.utils.rnn import pad_packed_sequence as unpack
 from model import *
 from utils import *
 
-USE_CUDA = True
+from config import Config
 
 final_steps = 50000
 plot_every = 200
@@ -75,7 +75,7 @@ def masked_cross_entropy(logits, targets, lengths):
     return losses.sum() / lengths.float().sum()
 
 
-def train(input_batch, target_batch, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion):
+def train(input_batch, len_inputs, target_batch, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion):
     # Zero gradients of both optimizers
     encoder_optimizer.zero_grad()
     decoder_optimizer.zero_grad()
@@ -89,7 +89,7 @@ def train(input_batch, target_batch, encoder, decoder, encoder_optimizer, decode
 
     # Run words through encoder
     encoder_hidden = encoder.init_hidden(batch_size)
-    encoder_outputs, encoder_hidden = encoder(input_batch, encoder_hidden)
+    encoder_outputs, encoder_hidden = encoder(input_batch, len_inputs, encoder_hidden)
 
     # Prepare input and output variables
     decoder_input = Variable(torch.LongTensor([[SOS_token] for _ in range(batch_size)]))
@@ -97,7 +97,7 @@ def train(input_batch, target_batch, encoder, decoder, encoder_optimizer, decode
     decoder_hidden = encoder_hidden  # Use last hidden state from encoder to start decoder
     decoder_outputs = Variable(torch.FloatTensor(batch_size, target_length, decoder.output_size).zero_())
 
-    if USE_CUDA:
+    if Config.use_cuda:
         decoder_input = decoder_input.cuda()
         decoder_context = decoder_context.cuda()
         decoder_outputs = decoder_outputs.cuda()
@@ -120,7 +120,7 @@ def train(input_batch, target_batch, encoder, decoder, encoder_optimizer, decode
             # Get most likely word index (highest value) from output
             _, top_index = decoder_output.data.topk(1)
             decoder_input = Variable(top_index)  # Chosen word is next input
-            if USE_CUDA: decoder_input = decoder_input.cuda()
+            if Config.use_cuda: decoder_input = decoder_input.cuda()
 
             # Stop at end of sentence (not necessary when using known targets)
             # TODO
@@ -149,16 +149,16 @@ criterion = nn.NLLLoss()
 for step in range(step, final_steps + 1):
 
     # Get training data for this cycle
-    inputs, targets = corpus.next_batch()
+    inputs, targets, len_inputs, len_targets = corpus.next_batch()
     input_variable = Variable(torch.LongTensor(inputs), requires_grad=False)
     target_variable = Variable(torch.LongTensor(targets), requires_grad=False)
 
-    if USE_CUDA:
+    if Config.use_cuda:
         input_variable = input_variable.cuda()
         target_variable = target_variable.cuda()
 
     # Run the train function
-    loss = train(input_variable, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion)
+    loss = train(input_variable, len_inputs, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion)
 
     # Keep track of loss
     print_loss_total += loss

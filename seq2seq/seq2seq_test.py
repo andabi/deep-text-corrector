@@ -7,7 +7,7 @@ print(decoder_test)
 
 encoder_hidden = encoder_test.init_hidden()
 word_input = Variable(torch.LongTensor([1, 2, 3]))
-if USE_CUDA:
+if Config.use_cuda:
     encoder_test.cuda()
     word_input = word_input.cuda()
 encoder_outputs, encoder_hidden = encoder_test(word_input, encoder_hidden)
@@ -17,7 +17,7 @@ decoder_attns = torch.zeros(1, 3, 3)
 decoder_hidden = encoder_hidden
 decoder_context = Variable(torch.zeros(1, decoder_test.hidden_size))
 
-if USE_CUDA:
+if Config.use_cuda:
     decoder_test.cuda()
     word_inputs = word_inputs.cuda()
     decoder_context = decoder_context.cuda()

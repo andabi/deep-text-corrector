@@ -4,8 +4,6 @@ from model import *
 from preprocess import *
 from config import Config
 
-USE_CUDA = True
-
 
 def evaluate(input_variable):
     batch_size, input_length = input_variable.size()
@@ -18,7 +16,7 @@ def evaluate(input_variable):
     decoder_input = Variable(torch.LongTensor([[SOS_token] for _ in range(batch_size)]))  # SOS
     decoder_context = Variable(torch.zeros(batch_size, decoder.hidden_size))
     decoder_hidden = encoder_hidden
-    if USE_CUDA:
+    if Config.use_cuda:
         decoder_input = decoder_input.cuda()
         decoder_context = decoder_context.cuda()
 
@@ -38,15 +36,15 @@ def evaluate(input_variable):
 
         # Next input is chosen word
         decoder_input = Variable(top_index)
-        if USE_CUDA: decoder_input = decoder_input.cuda()
+        if Config.use_cuda: decoder_input = decoder_input.cuda()
 
     return decoded_output  #, decoder_attentions[:, di + 1, :len(encoder_outputs)]
 
 
 def evaluate_randomly():
-    inputs, targets = corpus.next_batch(1)
+    inputs, targets, _, _ = corpus.next_batch(1)
     input_variable = Variable(torch.LongTensor(inputs), requires_grad=False)
-    if USE_CUDA:
+    if Config.use_cuda:
         input_variable = input_variable.cuda()
 
     output_tensor = evaluate(input_variable)

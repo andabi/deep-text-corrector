@@ -33,7 +33,7 @@ def load_state(step=None, path='checkpoints/model'):
 def get_model(step=None, state=None):
     encoder = EncoderRNN(corpus.dict.n_words, hidden_size, n_layers)
     decoder = AttnDecoderRNN(attn_model, hidden_size, corpus.dict.n_words, n_layers, dropout_p=dropout_p)
-    if USE_CUDA:
+    if Config.use_cuda:
         encoder.cuda()
         decoder.cuda()
 

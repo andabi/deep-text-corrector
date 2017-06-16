@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
-
-USE_CUDA = True
+from torch.nn.utils.rnn import pack_padded_sequence as pack, pad_packed_sequence as unpack
+from config import Config
 
 attn_model = 'general'
 hidden_size = 500
@@ -27,14 +27,15 @@ class EncoderRNN(nn.Module):
 
     def init_hidden(self, batch_size):
         hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_size))
-        if USE_CUDA: hidden = hidden.cuda()
+        if Config.use_cuda: hidden = hidden.cuda()
         return hidden
 
-    def forward(self, input_seq, hidden):
+    def forward(self, input_seq, len_inputs, hidden):
         # input_seq.size() = (B, S), hidden.size() = (L, B, H), embedded.size() = (B, S, H), output.size() = (B, S, H)
         # batch_size, seq_len = input_sequence.size()
         embedded = self.embedding(input_seq)
-        output, hidden = self.gru(embedded, hidden)
+        output, hidden = self.gru(pack(embedded, len_inputs, batch_first=True), hidden)
+        output, _ = unpack(output, batch_first=True)
         return output, hidden
 
 
@@ -104,7 +105,7 @@ class Attn(nn.Module):
         # Create variable to store attention energies
         # attn_energies.size() = (B, S)
         attn_energies = Variable(torch.zeros((batch_size, encoder_outputs_len)))  # B x S
-        if USE_CUDA: attn_energies = attn_energies.cuda()
+        if Config.use_cuda: attn_energies = attn_energies.cuda()
 
         # Calculate energies for each encoder output
         # attn_energies.size() = (B, S)
