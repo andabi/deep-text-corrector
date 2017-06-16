@@ -29,19 +29,8 @@ class WordDict:
         else:
             self.word2count[word] += 1
 
-
-class Corpus:
-    def __init__(self, max_length, path='./data/corpus.txt'):
-        self.lines = open(path).read().strip().split('\n')
-        self.pairs = [[s for s in l.split('\t')] for l in self.lines]
-        self.dict = WordDict()
-        self.max_length = max_length
-        for pair in self.pairs:
-            self.dict.add_indexes(pair[0])
-            self.dict.add_indexes(pair[1])
-
     def sentence_to_indexes(self, sentence, max_length):
-        indexes = [self.dict.word2index[word] for word in sentence.split(' ')]
+        indexes = [self.word2index[word] for word in sentence.split(' ')]
         indexes.append(EOS_token)
         n_indexes = len(indexes)
         indexes.extend([PAD_token for _ in range(max_length - len(indexes))])
@@ -49,13 +38,24 @@ class Corpus:
 
     def indexes_to_sentence(self, indexes):
         indexes = filter(lambda i: i != PAD_token, indexes)
-        indexes = map(lambda i: self.dict.index2word[i], indexes)
+        indexes = map(lambda i: self.index2word[i], indexes)
         return ' '.join(indexes)
+
+
+class Corpus:
+    def __init__(self, dict, max_length, path):
+        self.lines = open(path).read().strip().split('\n')
+        self.pairs = [[s for s in l.split('\t')] for l in self.lines]
+        self.dict = dict
+        self.max_length = max_length
+        for pair in self.pairs:
+            self.dict.add_indexes(pair[0])
+            self.dict.add_indexes(pair[1])
 
     def next_batch(self, batch_size=100):
         pairs = np.array(random.sample(self.pairs, batch_size))
-        input_lens = [self.sentence_to_indexes(s, self.max_length) for s in pairs[:, 0]]
-        target_lens = [self.sentence_to_indexes(s, self.max_length) for s in pairs[:, 1]]
+        input_lens = [self.dict.sentence_to_indexes(s, self.max_length) for s in pairs[:, 0]]
+        target_lens = [self.dict.sentence_to_indexes(s, self.max_length) for s in pairs[:, 1]]
         input_lens, target_lens = zip(*sorted(zip(input_lens, target_lens), key=lambda p: p[0][1], reverse=True))
         inputs = map(lambda i: i[0], input_lens)
         len_inputs = map(lambda i: i[1], input_lens)
@@ -63,4 +63,9 @@ class Corpus:
         len_targets = map(lambda i: i[1], target_lens)
         return inputs, targets, len_inputs, len_targets
 
-corpus = Corpus(Config.max_seq_length)
+
+def build_corpus():
+    word_dict = WordDict()
+    train_corpus = Corpus(word_dict, Config.max_seq_length, Config.train_data_path)
+    eval_corpus = Corpus(word_dict, Config.max_seq_length, Config.eval_data_path)
+    return train_corpus, eval_corpus, word_dict

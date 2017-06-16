@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import random
-
 # import sconce
 import torch.optim
 from torch.nn.utils.rnn import pad_packed_sequence as unpack
 
-from model import *
-from utils import *
-
 from config import Config
+from model import *
+from preprocess import *
+from utils import *
 
 final_steps = 50000
 plot_every = 200
@@ -138,18 +136,20 @@ def train(input_batch, len_inputs, target_batch, encoder, decoder, encoder_optim
     return loss.data[0] / target_length
 
 
+train_corpus, _, word_dict = build_corpus()
 state = load_state()
 step = 1
 if state:
     step = state['step'] + 1
-encoder, decoder = get_model(state=state)
+encoder, decoder = get_model(word_dict.n_words, state=state)
 encoder_optimizer, decoder_optimizer = get_optimizer(encoder, decoder, lr=learning_rate, state=state)
 criterion = nn.NLLLoss()
+
 
 for step in range(step, final_steps + 1):
 
     # Get training data for this cycle
-    inputs, targets, len_inputs, len_targets = corpus.next_batch()
+    inputs, targets, len_inputs, len_targets = train_corpus.next_batch()
     input_variable = Variable(torch.LongTensor(inputs), requires_grad=False)
     target_variable = Variable(torch.LongTensor(targets), requires_grad=False)
 

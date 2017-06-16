@@ -3,7 +3,6 @@ import os
 
 import torch.optim as optim
 
-from preprocess import corpus
 from seq2seq.seq2seq import *
 
 
@@ -30,9 +29,9 @@ def load_state(step=None, path='checkpoints/model'):
     return state
 
 
-def get_model(step=None, state=None):
-    encoder = EncoderRNN(corpus.dict.n_words, hidden_size, n_layers)
-    decoder = AttnDecoderRNN(attn_model, hidden_size, corpus.dict.n_words, n_layers, dropout_p=dropout_p)
+def get_model(n_classes, state=None, step=None):
+    encoder = EncoderRNN(n_classes, hidden_size, n_layers)
+    decoder = AttnDecoderRNN(attn_model, hidden_size, n_classes, n_layers, dropout_p=dropout_p)
     if Config.use_cuda:
         encoder.cuda()
         decoder.cuda()

@@ -5,12 +5,12 @@ from preprocess import *
 from config import Config
 
 
-def evaluate(input_variable):
+def evaluate(input_variable, len_inputs):
     batch_size, input_length = input_variable.size()
 
     # Run through encoder
     encoder_hidden = encoder.init_hidden(batch_size)
-    encoder_outputs, encoder_hidden = encoder(input_variable, encoder_hidden)
+    encoder_outputs, encoder_hidden = encoder(input_variable, len_inputs, encoder_hidden)
 
     # Create starting vectors for decoder
     decoder_input = Variable(torch.LongTensor([[SOS_token] for _ in range(batch_size)]))  # SOS
@@ -41,19 +41,17 @@ def evaluate(input_variable):
     return decoded_output  #, decoder_attentions[:, di + 1, :len(encoder_outputs)]
 
 
-def evaluate_randomly():
-    inputs, targets, _, _ = corpus.next_batch(1)
-    input_variable = Variable(torch.LongTensor(inputs), requires_grad=False)
-    if Config.use_cuda:
-        input_variable = input_variable.cuda()
+_, eval_corpus, word_dict = build_corpus()
+encoder, decoder = get_model(word_dict.n_words)
 
-    output_tensor = evaluate(input_variable)
-    output_words = output_tensor.cpu().numpy().tolist()
+inputs, targets, len_inputs, _ = eval_corpus.next_batch(1)
+input_variable = Variable(torch.LongTensor(inputs), requires_grad=False)
+if Config.use_cuda:
+    input_variable = input_variable.cuda()
 
-    print('SRC:\t{}'.format(corpus.indexes_to_sentence(inputs[0])))
-    print('PRE:\t{}'.format(corpus.indexes_to_sentence(output_words[0])))
-    print('TRU:\t{}'.format(corpus.indexes_to_sentence(targets[0])))
+output_tensor = evaluate(input_variable, len_inputs)
+output_words = output_tensor.cpu().numpy().tolist()
 
-
-encoder, decoder = get_model()
-evaluate_randomly()
+print('SRC:\t{}'.format(word_dict.indexes_to_sentence(inputs[0])))
+print('PRE:\t{}'.format(word_dict.indexes_to_sentence(output_words[0])))
+print('TRU:\t{}'.format(word_dict.indexes_to_sentence(targets[0])))
