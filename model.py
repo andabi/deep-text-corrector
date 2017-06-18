@@ -29,18 +29,19 @@ def load_state(step=None, path='checkpoints/model'):
     return state
 
 
-def get_model(n_classes, state=None, step=None):
+def get_model(n_classes, state=None, step=None, load=True):
     encoder = EncoderRNN(n_classes, hidden_size, n_layers)
     decoder = AttnDecoderRNN(attn_model, hidden_size, n_classes, n_layers, dropout_p=dropout_p)
     if Config.use_cuda:
         encoder.cuda()
         decoder.cuda()
 
-    if not state:
-        state = load_state(step)
-    if state:
-        encoder.load_state_dict(state['encoder'])
-        decoder.load_state_dict(state['decoder'])
+    if load:
+        if not state:
+            state = load_state(step)
+        if state:
+            encoder.load_state_dict(state['encoder'])
+            decoder.load_state_dict(state['decoder'])
 
     return encoder, decoder
 
