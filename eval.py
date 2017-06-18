@@ -3,7 +3,7 @@
 from model import *
 from preprocess import *
 from config import Config
-
+from utils import wer, now
 
 def evaluate(input_variable, len_inputs):
     batch_size, input_length = input_variable.size()
@@ -44,13 +44,15 @@ def evaluate(input_variable, len_inputs):
 _, eval_corpus, word_dict = build_corpus()
 encoder, decoder = get_model(word_dict.n_words)
 
-inputs, targets, len_inputs, _ = eval_corpus.next_batch(1)
+inputs, targets, len_inputs, _ = eval_corpus.next_batch(100)
 input_variable = Variable(torch.LongTensor(inputs), requires_grad=False)
 if Config.use_cuda:
     input_variable = input_variable.cuda()
 
 output_tensor = evaluate(input_variable, len_inputs)
 output_words = output_tensor.cpu().numpy().tolist()
+
+print('WER:\t{}'.format(np.mean(map(lambda (a, b): wer(a, b), zip(output_words, targets)))))
 
 print('SRC:\t{}'.format(word_dict.indexes_to_sentence(inputs[0])))
 print('PRE:\t{}'.format(word_dict.indexes_to_sentence(output_words[0])))
