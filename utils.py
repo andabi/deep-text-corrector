@@ -52,7 +52,3 @@ def wer(r, h):
                 d[i][j] = min(substitution, insertion, deletion)
 
     return d[len(r)][len(h)] / float(len(r))
-
-
-def blue():
-    nltk.translate.corpus_blue()

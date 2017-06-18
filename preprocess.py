@@ -30,7 +30,7 @@ class WordDict:
             self.word2count[word] += 1
 
     def sentence_to_indexes(self, sentence, max_length):
-        indexes = [self.word2index[word] for word in sentence.split(' ')]
+        indexes = [self.word2index[word] for word in sentence.split(' ')][:max_length - 1]
         indexes.append(EOS_token)
         n_indexes = len(indexes)
         indexes.extend([PAD_token for _ in range(max_length - len(indexes))])
@@ -44,13 +44,16 @@ class WordDict:
 
 class Corpus:
     def __init__(self, dict, max_length, path):
-        self.lines = open(path).read().strip().split('\n')
+        self.max_length = max_length
+        self.lines = self.filter_raw_string(open(path).read()).split('\n')
         self.pairs = [[s for s in l.split('\t')] for l in self.lines]
         self.dict = dict
-        self.max_length = max_length
         for pair in self.pairs:
             self.dict.add_indexes(pair[0])
             self.dict.add_indexes(pair[1])
+
+    def filter_raw_string(self, str):
+        return str.strip().translate(None, '<>')
 
     def next_batch(self, batch_size=100):
         pairs = np.array(random.sample(self.pairs, batch_size))

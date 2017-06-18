@@ -4,7 +4,6 @@
 import torch.optim
 from torch.nn.utils.rnn import pad_packed_sequence as unpack
 
-from config import Config
 from model import *
 from preprocess import *
 from utils import *

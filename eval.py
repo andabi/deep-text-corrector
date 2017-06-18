@@ -62,7 +62,7 @@ def eval_examples(sources, preds, targets, num=3):
     return str
 
 _, eval_corpus, word_dict = build_corpus()
-encoder, decoder = get_model(word_dict.n_words, load=False)
+encoder, decoder = get_model(word_dict.n_words)
 
 inputs, targets, len_inputs, _ = eval_corpus.next_batch(100)
 input_variable = Variable(torch.LongTensor(inputs), requires_grad=False)

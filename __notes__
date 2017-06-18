@@ -1,7 +1,8 @@
-accuracy
-encoder_max_len = max(input_lens)
-decoder_max_len -> max(target_lens) or max_len (eval)
-max_size => 50
+build_corpus
+max_len
+- encoder_max_len = max(input_lens)
+- decoder_max_len -> max(target_lens) or max_len (eval)
+- max_size => 50
 visualizing attn
 tensorboard
 
