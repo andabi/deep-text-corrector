@@ -1,7 +1,7 @@
 import math
 import time
 import numpy as np
-
+import nltk
 
 def as_minutes(s):
     m = math.floor(s / 60)
@@ -27,7 +27,8 @@ def show_plot(points):
     ax.yaxis.set_major_locator(loc)
     plt.plot(points)
     
-    
+
+# r = reference, h = hypothesis
 def wer(r, h):
     # initialisation
     d = np.zeros((len(r)+1)*(len(h)+1), dtype=np.uint8)
@@ -50,4 +51,8 @@ def wer(r, h):
                 deletion     = d[i-1][j] + 1
                 d[i][j] = min(substitution, insertion, deletion)
 
-    return d[len(r)][len(h)] / float(len(h))
+    return d[len(r)][len(h)] / float(len(r))
+
+
+def blue():
+    nltk.translate.corpus_blue()

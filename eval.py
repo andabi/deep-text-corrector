@@ -3,7 +3,7 @@
 from model import *
 from preprocess import *
 from config import Config
-from utils import wer, now
+
 
 def evaluate(input_variable, len_inputs):
     batch_size, input_length = input_variable.size()
@@ -41,6 +41,26 @@ def evaluate(input_variable, len_inputs):
     return decoded_output  #, decoder_attentions[:, di + 1, :len(encoder_outputs)]
 
 
+def corpus_bleu_single_ref(r, h):
+    from nltk.translate.bleu_score import corpus_bleu
+    r = np.expand_dims(r, axis=1)
+    return corpus_bleu(r, h)
+
+
+def corpus_wer(r, h):
+    from utils import wer
+    return np.mean(map(lambda (a, b): wer(a, b), zip(r, h)))
+
+
+def eval_examples(sources, preds, targets, num=3):
+    str = ''
+    for i in range(num):
+        source = word_dict.indexes_to_sentence(sources[i])
+        pred = word_dict.indexes_to_sentence(preds[i])
+        target = word_dict.indexes_to_sentence(targets[i])
+        str += '#{}\nSource:\t{}\nPred:\t{}\nTarget:\t{}\n\n'.format(i, source, pred, target)
+    return str
+
 _, eval_corpus, word_dict = build_corpus()
 encoder, decoder = get_model(word_dict.n_words)
 
@@ -50,10 +70,8 @@ if Config.use_cuda:
     input_variable = input_variable.cuda()
 
 output_tensor = evaluate(input_variable, len_inputs)
-output_words = output_tensor.cpu().numpy().tolist()
+preds = output_tensor.cpu().numpy().tolist()
 
-print('WER:\t{}'.format(np.mean(map(lambda (a, b): wer(a, b), zip(output_words, targets)))))
-
-print('SRC:\t{}'.format(word_dict.indexes_to_sentence(inputs[0])))
-print('PRE:\t{}'.format(word_dict.indexes_to_sentence(output_words[0])))
-print('TRU:\t{}'.format(word_dict.indexes_to_sentence(targets[0])))
+print('<Baseline>\nWER:{}\nBLEU:{}\n'.format(corpus_wer(targets, inputs), corpus_bleu_single_ref(targets, inputs)))
+print('<Prediction>\nWER:{}\nBLEU:{}\n'.format(corpus_wer(targets, preds), corpus_bleu_single_ref(targets, preds)))
+print('<Examples>\n{}'.format(eval_examples(inputs, preds, targets)))
