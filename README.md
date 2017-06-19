@@ -1,5 +1,6 @@
-# gec
+# deep text corrector
 
+## datasets
 [CoNLL-2013 Shared Task: Grammatical Error Correction](http://www.comp.nus.edu.sg/~nlp/conll13st.html)
 [Overview Paper](http://www.comp.nus.edu.sg/~nlp/conll13st/CoNLLST01.pdf)
 [Datasets](http://www.comp.nus.edu.sg/~nlp/conll13st/release2.3.1.tar.gz)
@@ -9,6 +10,6 @@
 [Overview Paper](http://www.comp.nus.edu.sg/~nlp/conll14st.html)
 [Datasets] Needs a license form.
 
-References
+## References
 https://github.com/atpaino/deep-text-corrector
 
