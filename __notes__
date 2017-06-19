@@ -23,7 +23,6 @@ beam search
 ---
 refactoring
 - cuda() 자동으로
-- # -*- coding: utf-8 -*-
 
 ---
 pytorch

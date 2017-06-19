@@ -1,6 +1,14 @@
-# deep text corrector
+# Deep Text Corrector
 
-## datasets
+## Introduction
+This project aims to make a text corrector for English learners using deep neural net. This project is implemented in Pytorch
+- First trial: seq2seq w/ attention + nucle 2.3 dataset
+- Next..
+    - more data, data augmentations, ...
+    - tweeking nets like Bytenet or Transformer
+    - beam search
+
+## Datasets
 [CoNLL-2013 Shared Task: Grammatical Error Correction](http://www.comp.nus.edu.sg/~nlp/conll13st.html)
 [Overview Paper](http://www.comp.nus.edu.sg/~nlp/conll13st/CoNLLST01.pdf)
 [Datasets](http://www.comp.nus.edu.sg/~nlp/conll13st/release2.3.1.tar.gz)

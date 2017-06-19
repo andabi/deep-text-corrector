@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
 from seq2seq import *
 
 encoder_test = EncoderRNN(10, 10, 2)

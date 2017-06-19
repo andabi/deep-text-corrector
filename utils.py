@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
 import math
 import time
 import numpy as np
-import nltk
+
 
 def as_minutes(s):
     m = math.floor(s / 60)
