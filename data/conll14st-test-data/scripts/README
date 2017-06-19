@@ -1,0 +1,107 @@
+====================================================
+
+CoNLL-2014 Shared Task: Grammatical Error Correction
+
+Description of Data Preprocessing Scripts
+
+22 Apr 2014 Version 3.2
+====================================================
+
+
+Table of Contents
+=================
+
+  1. General
+  2. Pre-requisites
+  3. Usage
+
+1. General
+==========
+
+This README file describes the usage of scripts for preprocessing the NUCLE version 3.2 corpus. 
+
+Quickstart:
+
+  a. Regenerate the preprocessed files with full syntactic information:
+     % python preprocess.py -o nucle.sgml conllFileName annFileName m2FileName
+
+  b. Get tokenized annotations without syntactic information:
+     % python preprocess.py -l nucle.sgml conllFileName annFileName m2FileName
+
+  c. Get combined gold-standard answer file (without alternative):
+     % python preprocesscombine.py gold1.sgml gold2.sgml combinedAnswer
+  
+  d. Get combined gold-standard answer file (with alternative answers):
+     % python preprocesswithalt.py essay.sgml 2 gold1.sgml gold2.sgml alt1.sgml alt2.sgml alt3.sgml combinedAnsWithAlt
+
+where
+       nucle.sgml  -  input SGML file
+    conllFileName  -  output file that contains pre-processed sentences in CoNLL format.
+      annFileName  -  output file that contains standoff error annotations.
+       m2FileName  -  output file that contains error annotations in the M2 scorer format.
+       gold1.sgml  -  input SGML file that contains the gold edits of the first annotator.
+       gold2.sgml  -  input SGML file that contains the gold edits of the second annotator.
+   combinedAnswer  -  output file that contains gold edits in the M2 scorer format
+                      combining the gold edits of the first and second annotator.
+        alt1.sgml  -  input SGML file that contains alternative edits by the first team.
+        alt2.sgml  -  input SGML file that contains alternative edits by the second team.
+        alt3.sgml  -  input SGML file that contains alternative edits by the third team.
+combinedAnsWithAlt -  output file that contains gold edits in the M2 scorer format
+                      combining the gold edits of the first and second annotator.
+
+2. Pre-requisites
+=================
+
++ Python (2.6.4, other versions >= 2.6.4, < 3.0 might work but are not tested)
++ nltk (http://www.nltk.org, version 2.0b7, needed for sentence splitting and word tokenization) 
++ Stanford parser (version 2.0.1, http://nlp.stanford.edu/software/stanford-parser-2012-03-09.tgz)
+
+If you only use the scripts to generate error annotations needed by the M2 scorer, Stanford parser is not required.
+Otherwise, "stanford-parser-2012-03-09" need to be in the same directory as "scripts".
+
+3. Usage
+========
+
+Preprocessing the data from single annotation
+
+Usage: python preprocess.py OPTIONS sgmlFileName conllFileName annotationFileName m2FileName
+
+Where
+  sgmlFileName       -     NUCLE SGML file
+  conllFileName      -     output file name for pre-processed sentences in CoNLL format (e.g., conll14st-preprocessed.conll).
+  annotationFileName -     output file name for error annotations (e.g., conll14st-preprocessed.conll.ann).
+  m2FileName         -     output file name in the M2 scorer format (e.g., conll14st-preprocessed.conll.m2).
+
+OPTIONS
+  -o      -   output will contain POS tags and parse tree info (i.e., the same as the released preprocessed file, runs slowly).
+  -l      -   output will NOT contain POS tags and parse tree info (runs quickly).
+
+
+Combining alternative annotations by multiple annotators
+
+Usage: python preprocesscombine.py sgmlFileName1 ... sgmlFileNameN m2FileName
+
+Where
+  sgmlFileName1      -     test data SGML file containing the gold edits of annotator 1
+  sgmlFileNameN      -     test data SGML file containing the gold edits of annotator N
+  m2FileName         -     output file in the M2 scorer format, containing annotations by N annotators.
+
+e.g., python preprocesscombine.py official-2014.0.sgml official-2014.1.sgml official-2014.combined.m2
+
+will generate official-2014.combined.m2 from alternative annotations by 2 annotators.
+
+
+Combining alternative annotations by multiple main annotators with annotations proposed by participants
+
+Usage: python preprocesswithalt.py essaySgmlFile M annotSgmlFile1 ... annotSgmlFileM alt1SgmlFileName ... altNSgmlFileName combM2FileName
+
+Where
+  essaySgmlFile      -    test data SGML file containing essay body, not necessarily annotations
+  M                  -    number of main annotations
+  annotSgmlFile1     -    test data SGML file containing the gold edits of main annotator 1
+  annotSgmlFileM     -    test data SGML file containing the gold edits of main annotator M
+  alt1SgmlFileName   -    the alternative annotation SGML file proposed by team 1 (first), containing only annotations that differ from the main annotation
+  altNSgmlFileName   -    the alternative annotation SGML file proposed by team N (last), containing only annotations that differ from the main annotation
+  combM2FileName     -    output file name in the M2 scorer format, containing combination of main and alternative annotations
+
+e.g., python preprocesswithalt official-2014.0.sgml 2 official-2014.0.sgml official-2014.1.sgml alternative-teama.sgml alternative-teamb.sgml alternative-teamc.sgml official-2014.combined-withalt.m2

@@ -1,0 +1,189 @@
+CoNLL-2014 Official Test Data
+Release 3.2
+22 Apr 2014
+
+This README file describes the test data for the CoNLL-2014 Shared
+Task: Grammatical Error Correction.
+
+The package is distributed freely with the following copyright
+
+Copyright (C) 2014 Hwee Tou Ng, Siew Mei Wu, Ted Briscoe,
+                   Christian Hadiwinoto, Raymond Hendy Susanto,
+                   Christopher Bryant
+
+Any questions regarding the test data should be directed to
+Hwee Tou Ng at: nght@comp.nus.edu.sg
+
+
+1. Directory Structure and Contents
+===================================
+
+The top-level directory has two subdirectories, namely
+
+- noalt/   : the annotated test data without alternatives contributed
+             by the participants
+- alt/     : the annotated test data with moderated participants'
+             alternative annotations
+- scripts/ : the scripts used to preprocess the test data inside the
+             two subdirectories
+
+
+2. Data Format 
+==============
+
+The corpus is distributed in a simple SGML format.  All annotations
+come in a "stand-off" format. The start position and end position of
+an annotation are given by paragraph and character offsets.
+Paragraphs are enclosed in <P>...</P> tags. Paragraphs and characters
+are counted starting from zero. Each annotation includes the following
+fields: the error category, the correction, and optionally a
+comment. If the correction replaces the original text at the given
+location, it should fix the grammatical error.
+
+Example:
+
+<DOC nid="3">
+<TEXT>
+<P>
+People with close blood relationship generally ...
+</P>
+<P>
+Focus on the negative side of the annouance ...
+</P>
+...
+</TEXT>
+<ANNOTATION teacher_id="8">
+<MISTAKE start_par="0" start_off="24" end_par="0" end_off="36">
+<TYPE>Nn</TYPE>
+<CORRECTION>relationships</CORRECTION>
+</MISTAKE>
+...
+</ANNOTATION>
+</DOC>
+<DOC nid="4">
+...
+
+Below is a complete list of the error categories in the noalt/ and alt/
+subdirectories:
+
+ERROR TAG    ERROR CATEGORY
+---------------------------
+Vt	     Verb tense
+Vm	     Verb modal
+V0	     Missing verb
+Vform	     Verb form
+SVA	     Subject-verb-agreement
+ArtOrDet     Article or Determiner
+Nn	     Noun number
+Npos	     Noun possesive
+Pform	     Pronoun form
+Pref	     Pronoun reference
+Prep         Preposition
+Wci	     Wrong collocation/idiom
+Wa	     Acronyms
+Wform	     Word form
+Wtone	     Tone
+Srun	     Runons, comma splice
+Smod	     Dangling modifier
+Spar	     Parallelism
+Sfrag	     Fragment
+Ssub	     Subordinate clause
+WOinc	     Incorrect sentence form
+WOadv	     Adverb/adjective position
+Trans	     Link word/phrases
+Mec	     Punctuation, capitalization, spelling, typos
+Rloc-	     Local redundancy
+Cit	     Citation
+Others	     Other errors
+Um	     Unclear meaning (cannot be corrected)
+
+The official annotation file contains all the default annotations to
+make the whole text correct. Meanwhile, each of the alternative
+annotation files contains only annotations for sentences that can be
+corrected in a different way, i.e. sentences that have alternative
+annotations. If according to an alternative, a sentence can remain
+unchanged, a special tag "noop" is used for that particular sentence.
+
+
+3. Updates included in version 2.1
+==================================
+
+The major change made in version 2.1 is to map the past error
+categories Wcip and Rloc to Prep, Wci, ArtOrDet, and Rloc-.
+
+In the original data, there is no explicit preposition error
+category. Instead, preposition errors are part of the Wcip (Wrong
+collocation/idiom/preposition) and Rloc (local redundancy) error
+categories. In addition, redundant article or determiner errors are
+part of the Rloc error category.
+
+
+4. Updates included in version 2.2
+==================================
+
+- Fixed the bug on expanding an error annotation involving part of a
+token to the full token.
+
+- Other miscellaneous corrections were made.
+
+
+5. Updates included in version 2.3
+==================================
+
+- Fixed the bug involving tokenization of punctuation symbols in the
+correction string.
+
+- Fixed the tokenization example in the README file of the M^2 scorer
+to reflect the real tokenization to be used and removed irrelevant
+codes from the scorer package.
+
+
+6. Updates included in version 3.0
+==================================
+
+- Resolved overlapping annotations in the NUCLE corpus to make them
+  non-overlapping.
+
+- Corrected some minor mistakes in error annotations.
+
+
+7. Updates included in version 3.1
+==================================
+
+- Removed duplicate annotations in the NUCLE corpus with the same span
+  and correction string but different error type so as to keep only one of
+  those annotations. This fix only affects 0.1% of all annotations.
+
+- Fixed end-of-paragraph annotations so that the end offset of such
+  annotations is the last character position in the paragraph. This fix
+  only affects 0.7% of all annotations.
+
+- Corrected some minor mistakes in error annotations.
+
+- Inclusion of the CoNLL-2013 test data, with all the known problems
+  described above fixed. Participating teams in the CoNLL-2014 shared
+  task can make use of the CoNLL-2013 test data in training and
+  developing their systems if they wish to do so.
+
+- Fixed a minor bug in the M2 scorer that caused duplicate insertion
+  edits to receive high scores.
+
+
+8. Updates included in version 3.2
+==================================
+
+- Fixed the preprocessing script such that a gold edit that inserts an
+  empty string is not included in the token-level gold edit and scorer
+  answer files.
+
+- Removed one edit that inserted an empty string from the CoNLL-2014
+  test data. Also removed such instances from the NUCLE training data.
+
+- Fixed a bug in the M2 scorer arising from scoring against gold edits
+  from multiple annotators. Specifically, the bug sometimes caused
+  incorrect scores to be reported when scoring against the gold edits
+  of subsequent annotators (other than the first annotator).
+
+- Fixed a bug in the M2 scorer that caused erroneous scores to be
+  reported when dealing with insertion edits followed by deletion edits
+  (or vice versa).

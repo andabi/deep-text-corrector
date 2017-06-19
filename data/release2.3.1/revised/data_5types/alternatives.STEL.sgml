@@ -1,0 +1,779 @@
+<DOC nid="2">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="509" end_par="1" end_off="521">
+<TYPE>Prep</TYPE>
+<CORRECTION>of</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="561" end_par="1" end_off="584">
+<TYPE>Nn</TYPE>
+<CORRECTION>amount of disagreement</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="551" end_par="3" end_off="562">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>society</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="608" end_par="3" end_off="610">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>of an</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="611" end_par="3" end_off="624">
+<TYPE>Nn</TYPE>
+<CORRECTION>individual's</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="3">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="533" end_par="0" end_off="549">
+<TYPE>Nn</TYPE>
+<CORRECTION>as school campuses</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="281" end_par="2" end_off="292">
+<TYPE>Prep</TYPE>
+<CORRECTION>invading</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="293" end_par="2" end_off="308">
+<TYPE>Nn</TYPE>
+<CORRECTION>humans' privacy</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="522" end_par="3" end_off="532">
+<TYPE>Prep</TYPE>
+<CORRECTION>for infringing</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="533" end_par="3" end_off="548">
+<TYPE>Nn</TYPE>
+<CORRECTION>others' privacy</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="607" end_par="3" end_off="623">
+<TYPE>Nn</TYPE>
+<CORRECTION>others' consent.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="4">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="2" start_off="532" end_par="2" end_off="546">
+<TYPE>Vform</TYPE>
+<CORRECTION>this is happening</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="558" end_par="2" end_off="564">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>in</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="565" end_par="2" end_off="572">
+<TYPE>Nn</TYPE>
+<CORRECTION>countries</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="579" end_par="2" end_off="581">
+<TYPE>SVA</TYPE>
+<CORRECTION>are</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="5">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="3" start_off="448" end_par="3" end_off="463">
+<TYPE>Nn</TYPE>
+<CORRECTION>animal or bird</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="473" end_par="3" end_off="482">
+<TYPE>Prep</TYPE>
+<CORRECTION>to</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="6">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="376" end_par="0" end_off="386">
+<TYPE>Vform</TYPE>
+<CORRECTION>use as a</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="392" end_par="1" end_off="395">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="424" end_par="1" end_off="439">
+<TYPE>Nn</TYPE>
+<CORRECTION>to fight crime</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="7">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="3" start_off="4" end_par="3" end_off="23">
+<TYPE>Nn</TYPE>
+<CORRECTION>privacy concerns</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="82" end_par="3" end_off="89">
+<TYPE>Nn</TYPE>
+<CORRECTION>feelings</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="427" end_par="3" end_off="442">
+<TYPE>Vform</TYPE>
+<CORRECTION>records will</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="9">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="2" start_off="910" end_par="2" end_off="975">
+<TYPE>noop</TYPE>
+<CORRECTION>Pets are supposed to be chained when they are out on the streets.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="10">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="3" start_off="334" end_par="3" end_off="361">
+<TYPE>Nn</TYPE>
+<CORRECTION>generate aggressive feelings</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="413" end_par="3" end_off="417">
+<TYPE>Prep</TYPE>
+<CORRECTION>toward</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="451" end_par="3" end_off="454">
+<TYPE>Nn</TYPE>
+<CORRECTION>tags</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="458" end_par="3" end_off="465">
+<TYPE>Nn</TYPE>
+<CORRECTION>implants</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="11">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="8" end_par="0" end_off="22">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>, improved</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="74" end_par="0" end_off="82">
+<TYPE>Nn</TYPE>
+<CORRECTION>locations</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="124" end_par="0" end_off="135">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>book as</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="185" end_par="0" end_off="187">
+<TYPE>Prep</TYPE>
+<CORRECTION>to</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="12">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="438" end_par="0" end_off="455">
+<TYPE>Nn</TYPE>
+<CORRECTION>locate his friends</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="675" end_par="1" end_off="680">
+<TYPE>Nn</TYPE>
+<CORRECTION>beings</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="714" end_par="1" end_off="719">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="729" end_par="1" end_off="733">
+<TYPE>Nn</TYPE>
+<CORRECTION>lives</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="13">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="255" end_par="0" end_off="269">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>the mean time</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="312" end_par="0" end_off="316">
+<TYPE>SVA</TYPE>
+<CORRECTION>means</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="350" end_par="0" end_off="352">
+<TYPE>Prep</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="364" end_par="0" end_off="377">
+<TYPE>Prep</TYPE>
+<CORRECTION>everywhere</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="5" end_par="2" end_off="30">
+<TYPE>SVA</TYPE>
+<CORRECTION>technology is encouraged</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="69" end_par="2" end_off="77">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>RFID</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="94" end_par="2" end_off="98">
+<TYPE>Nn</TYPE>
+<CORRECTION>bodies</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="476" end_par="2" end_off="485">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>RFID.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="14">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="169" end_par="1" end_off="174">
+<TYPE>Nn</TYPE>
+<CORRECTION>humans</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="188" end_par="1" end_off="199">
+<TYPE>Prep</TYPE>
+<CORRECTION>to privacy</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="1001" end_par="1" end_off="1164">
+<TYPE>noop</TYPE>
+<CORRECTION>If this piece of information is misused, chances are high that the consumer would suffer loss like financial loss or even cause danger to the life of the consumer.</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="42" end_par="2" end_off="47">
+<TYPE>Nn</TYPE>
+<CORRECTION>beings</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="77" end_par="2" end_off="92">
+<TYPE>Nn</TYPE>
+<CORRECTION>during our lives</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="16">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="494" end_par="0" end_off="590">
+<TYPE>noop</TYPE>
+<CORRECTION>However, besides tracking goods for people, people begin to use this technology to track people.</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="303" end_par="2" end_off="317">
+<TYPE>Nn</TYPE>
+<CORRECTION>open to abuse</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="410" end_par="2" end_off="413">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>a</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="534" end_par="2" end_off="537">
+<TYPE>Prep</TYPE>
+<CORRECTION>to</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="546" end_par="2" end_off="550">
+<TYPE>SVA</TYPE>
+<CORRECTION>has</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="705" end_par="2" end_off="876">
+<TYPE>noop</TYPE>
+<CORRECTION>So, when employees begin to conflict with this tracking system, they will find some ways to escape the tracking system like asking friends to help them to punch the cards.</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="29" end_par="3" end_off="35">
+<TYPE>Nn</TYPE>
+<CORRECTION>systems</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="55" end_par="3" end_off="66">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>people in the</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="17">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="2" start_off="271" end_par="2" end_off="288">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>even planting a</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="299" end_par="2" end_off="304">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>the human</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="7" start_off="282" end_par="7" end_off="291">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>area in the</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="18">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="640" end_par="1" end_off="659">
+<TYPE>Nn</TYPE>
+<CORRECTION>than asking witnesses</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="19">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="2" start_off="525" end_par="2" end_off="546">
+<TYPE>Nn</TYPE>
+<CORRECTION>science fiction</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="557" end_par="2" end_off="564">
+<TYPE>Nn</TYPE>
+<CORRECTION>effort</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="661" end_par="2" end_off="663">
+<TYPE>Prep</TYPE>
+<CORRECTION>by</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="668" end_par="2" end_off="679">
+<TYPE>Nn</TYPE>
+<CORRECTION>government</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="4" start_off="201" end_par="4" end_off="302">
+<TYPE>noop</TYPE>
+<CORRECTION>People must make sure that the government is not abusing its power in ways including tracking people.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="20">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="413" end_par="0" end_off="426">
+<TYPE>Nn</TYPE>
+<CORRECTION>into our lives</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="21">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="3" start_off="230" end_par="3" end_off="241">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>stolen,</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="4" start_off="546" end_par="4" end_off="564">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>, surveillance</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="22">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="109" end_par="0" end_off="111">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>a</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="136" end_par="0" end_off="147">
+<TYPE>Nn</TYPE>
+<CORRECTION>government</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="24">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="707" end_par="1" end_off="722">
+<TYPE>Nn</TYPE>
+<CORRECTION>such situations,</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="25">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="4" start_off="69" end_par="4" end_off="90">
+<TYPE>Nn</TYPE>
+<CORRECTION>an individual's privacy.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="28">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="321" end_par="1" end_off="333">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>, increasing the</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="821" end_par="1" end_off="835">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>the economy.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="29">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="3" start_off="418" end_par="3" end_off="435">
+<TYPE>Nn</TYPE>
+<CORRECTION>problems of public</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="436" end_par="3" end_off="451">
+<TYPE>Nn</TYPE>
+<CORRECTION>transportation</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="495" end_par="3" end_off="504">
+<TYPE>Nn</TYPE>
+<CORRECTION>resource</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="505" end_par="3" end_off="513">
+<TYPE>Nn</TYPE>
+<CORRECTION>shortages</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="31">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="756" end_par="1" end_off="859">
+<TYPE>noop</TYPE>
+<CORRECTION>Therefore the challenge is that we need to maintain or improve the state of living is a huge challenge.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="32">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="812" end_par="1" end_off="815">
+<TYPE>Vform</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="912" end_par="1" end_off="933">
+<TYPE>Nn</TYPE>
+<CORRECTION>handle such situations</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="553" end_par="2" end_off="566">
+<TYPE>Nn</TYPE>
+<CORRECTION>people's lives</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="33">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="104" end_par="1" end_off="158">
+<TYPE>noop</TYPE>
+<CORRECTION>There are a series of diseases that hinders longevity.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="34">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="165" end_par="0" end_off="184">
+<TYPE>Nn</TYPE>
+<CORRECTION>'s living conditions</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="35">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="87" end_par="1" end_off="94">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>other</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="95" end_par="1" end_off="99">
+<TYPE>Nn</TYPE>
+<CORRECTION>words</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="160" end_par="1" end_off="184">
+<TYPE>Vform</TYPE>
+<CORRECTION>medical problems compared</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="206" end_par="1" end_off="210">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>the</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="483" end_par="3" end_off="496">
+<TYPE>Prep</TYPE>
+<CORRECTION>the demand for</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="36">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="338" end_par="1" end_off="345">
+<TYPE>Nn</TYPE>
+<CORRECTION>products</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="361" end_par="1" end_off="365">
+<TYPE>Nn</TYPE>
+<CORRECTION>lives</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="366" end_par="1" end_off="388">
+<TYPE>Vform</TYPE>
+<CORRECTION>much healthier compared</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="37">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="787" end_par="1" end_off="792">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>the</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="793" end_par="1" end_off="801">
+<TYPE>Nn</TYPE>
+<CORRECTION>employees</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="821" end_par="1" end_off="830">
+<TYPE>SVA</TYPE>
+<CORRECTION>have to be</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="837" end_par="1" end_off="857">
+<TYPE>Prep</TYPE>
+<CORRECTION>concentrate on their</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="959" end_par="1" end_off="969">
+<TYPE>Nn</TYPE>
+<CORRECTION>supplements</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="407" end_par="2" end_off="415">
+<TYPE>Nn</TYPE>
+<CORRECTION>trouble</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="419" end_par="2" end_off="422">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="38">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="3" start_off="290" end_par="3" end_off="305">
+<TYPE>Prep</TYPE>
+<CORRECTION>the existing</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="368" end_par="3" end_off="371">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="372" end_par="3" end_off="380">
+<TYPE>Nn</TYPE>
+<CORRECTION>standards</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="39">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="750" end_par="1" end_off="753">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="795" end_par="1" end_off="806">
+<TYPE>Nn</TYPE>
+<CORRECTION>of our lives</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="41" end_par="2" end_off="53">
+<TYPE>Nn</TYPE>
+<CORRECTION>expectancy</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="55" end_par="2" end_off="78">
+<TYPE>SVA</TYPE>
+<CORRECTION>ageing problems become</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="41">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="3" end_par="0" end_off="9">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>the modern</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="41" end_par="0" end_off="45">
+<TYPE>Vform</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="76" end_par="0" end_off="83">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>the concept</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="84" end_par="0" end_off="100">
+<TYPE>Nn</TYPE>
+<CORRECTION>of earth villages</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="765" end_par="1" end_off="777">
+<TYPE>Prep</TYPE>
+<CORRECTION>that most</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="796" end_par="1" end_off="798">
+<TYPE>Prep</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="852" end_par="1" end_off="855">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="873" end_par="1" end_off="880">
+<TYPE>Nn</TYPE>
+<CORRECTION>problems</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="906" end_par="1" end_off="909">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="42">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="2" start_off="708" end_par="2" end_off="711">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="719" end_par="2" end_off="736">
+<TYPE>Vform</TYPE>
+<CORRECTION>society is becoming</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="764" end_par="2" end_off="767">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="826" end_par="2" end_off="832">
+<TYPE>Nn</TYPE>
+<CORRECTION>careers</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="44">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="0" start_off="342" end_par="0" end_off="360">
+<TYPE>Nn</TYPE>
+<CORRECTION>and reduced labour</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="361" end_par="0" end_off="363">
+<TYPE>Prep</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="0" start_off="364" end_par="0" end_off="367">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="329" end_par="1" end_off="337">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>an advanced</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="370" end_par="1" end_off="386">
+<TYPE>Nn</TYPE>
+<CORRECTION>have higher rates</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="4" start_off="309" end_par="4" end_off="329">
+<TYPE>Nn</TYPE>
+<CORRECTION>considered as labour</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="46">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="2" start_off="246" end_par="2" end_off="247">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="259" end_par="2" end_off="274">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>progress at</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="2" start_off="799" end_par="2" end_off="871">
+<TYPE>noop</TYPE>
+<CORRECTION>But the primary labor force as well as the work force is from the youth.</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="48">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="390" end_par="1" end_off="392">
+<TYPE>Prep</TYPE>
+<CORRECTION>over</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="422" end_par="1" end_off="425">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="456" end_par="1" end_off="459">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="472" end_par="1" end_off="489">
+<TYPE>Vform</TYPE>
+<CORRECTION>health is rising</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="511" end_par="1" end_off="523">
+<TYPE>Nn</TYPE>
+<CORRECTION>expectancy</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="524" end_par="1" end_off="527">
+<TYPE>SVA</TYPE>
+<CORRECTION>is</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="50">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="1" start_off="937" end_par="1" end_off="958">
+<TYPE>Nn</TYPE>
+<CORRECTION>lower living standards</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="969" end_par="1" end_off="972">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="1042" end_par="1" end_off="1063">
+<TYPE>Nn</TYPE>
+<CORRECTION>their living standards</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="1" start_off="1165" end_par="1" end_off="1167">
+<TYPE>Prep</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="3" start_off="263" end_par="3" end_off="281">
+<TYPE>Nn</TYPE>
+<CORRECTION>its great meaning</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+
+<DOC nid="51">
+<ANNOTATION teacher_id="43">
+<MISTAKE start_par="3" start_off="105" end_par="3" end_off="108">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="5" start_off="56" end_par="5" end_off="63">
+<TYPE>Vform</TYPE>
+<CORRECTION>becoming</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="6" start_off="121" end_par="6" end_off="124">
+<TYPE>Prep</TYPE>
+<CORRECTION></CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="6" start_off="124" end_par="6" end_off="131">
+<TYPE>Nn</TYPE>
+<CORRECTION>labour</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="7" start_off="93" end_par="7" end_off="99">
+<TYPE>ArtOrDet</TYPE>
+<CORRECTION>a higher</CORRECTION>
+</MISTAKE>
+<MISTAKE start_par="7" start_off="122" end_par="7" end_off="133">
+<TYPE>Nn</TYPE>
+<CORRECTION>of our lives</CORRECTION>
+</MISTAKE>
+</ANNOTATION>
+</DOC>
+

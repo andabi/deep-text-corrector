@@ -1,0 +1,84 @@
+====================================================
+
+CoNLL-2013 Shared Task: Grammatical Error Correction
+
+Description of Data Preprocessing Scripts
+
+Created May 23, 2013			Version 2.3.1
+====================================================
+
+
+Table of Contents
+=================
+
+  1. General
+  2. Pre-requisites
+  3. Usage
+
+1. General
+==========
+
+This README file describes the usage of scripts for preprocessing the CoNLL-2013 official test data. 
+
+Quickstart:
+
+  a. Regenerate the preprocessed files with full syntactic information:
+     % python preprocess.py -o official.sgml conllFileName annFileName m2FileName
+
+  b. Get tokenized annotations without syntactic information:
+     % python preprocess.py -l official.sgml conllFileName annFileName m2FileName
+
+Where
+    conllFileName  -  output file that contains pre-processed sentences in CoNLL format.
+      annFileName  -  output file that contains standoff error annotations.
+       m2FileName  -  output file that contains error annotations in the M2 scorer format.
+
+  c. Creating gold-standard answers including the official and alternative annotations:
+     % python preprocesswithalt.py official.5types.sgml official.5types.sgml alternatives.UIUC.sgml alternatives.UMC.sgml alternatives.NTHU.sgml alternatives.STEL.sgml alternatives.TOR.sgml m2FileName
+
+Where
+       m2FileName  -  output file containing combined official and alternative annotations.
+
+Note: The repeated official.5types.sgml is deliberate since it is the program requirement.
+
+2. Pre-requisites
+=================
+
++ Python (2.6.4, other versions >= 2.6.4, < 3.0 might work but are not tested)
++ nltk (http://www.nltk.org, version 2.0b7, needed for sentence splitting and word tokenization, other versions might work) 
++ Stanford parser (version 2.0.1, http://nlp.stanford.edu/software/stanford-parser-2012-03-09.tgz)
+
+Directories:
+  stanford-parser-2012-03-09/
+  scripts/
+   
+If you only use the scripts to generate error annotations needed by the M2 scorer, Stanford parser is not required.
+Otherwise, "stanford-parser-2012-03-09" need to be in the same directory as "scripts".
+
+3. Usage
+========
+
+Preprocessing the main official test data:
+
+Usage: python preprocess.py OPTIONS sgmlFileName conllFileName annotationFileName m2FileName
+
+Where
+  sgmlFileName       -     NUCLE SGML file
+  conllFileName      -     output file name for pre-processed sentences in CoNLL format (e.g., conll13st-preprocessed.conll).
+  annotationFileName -     output file name for error annotations (e.g., conll13st-preprocessed.conll.ann).
+  m2FileName         -     output file name in the M2 scorer format (e.g., conll13st-preprocessed.conll.m2).
+
+OPTIONS
+  -o      -   output will contain POS tags and parse tree info (i.e., the same as the released preprocessed file, runs slowly).
+  -l      -   output will NOT contain POS tags and parse tree info (runs quickly).
+
+Getting the combined M^2 gold-standard answer:
+
+Usage: python preprocesswithalt.py essaySgmlFileName mainSgmlFileName alt1SgmlFileName ... altNSgmlFileName m2FileName
+
+Where
+  essaySgmlFile      -    official test data SGML file containing essay body, not necessarily annotations
+  mainAnnotSgmlFile  -    official test data SGML file containing the main annotations, not necessarily essay body
+  alt1SgmlFileName   -    the first alternative annotations SGML file, containing only annotations that differ from the main annotation
+  altNSgmlFileName   -    the last alternative annotations SGML file, containing only annotations that differ from the main annotation
+  combM2FileName     -    output file name in the M2 scorer format, containing combination of main and alternative annotations
