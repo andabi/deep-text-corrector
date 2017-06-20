@@ -1,38 +1,20 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 
-# import sconce
 import torch.optim
 from torch.nn.utils.rnn import pad_packed_sequence as unpack
 
 from model import *
 from preprocess import *
 from utils import *
+from tensorboard_logger import Logger
 
 final_steps = 50000
-plot_every = 200
 print_every = 1
 save_every = 500
 learning_rate = 0.0001
 teacher_forcing_ratio = 0.5
 clip = 5.0
-
-# job = sconce.Job('seq2seq-translate', {
-#     'attn_model': attn_model,
-#     'n_layers': n_layers,
-#     'dropout_p': dropout_p,
-#     'hidden_size': hidden_size,
-#     'learning_rate': learning_rate,
-#     'teacher_forcing_ratio': teacher_forcing_ratio,
-# })
-# job.plot_every = plot_every
-# job.log_every = print_every
-
-# Keep track of time elapsed and running averages
-start = time.time()
-plot_losses = []
-print_loss_total = 0  # Reset every print_every
-plot_loss_total = 0  # Reset every plot_every
 
 
 def sequence_mask(sequence_length, max_len=None):
@@ -136,15 +118,25 @@ def train(input_batch, len_inputs, target_batch, encoder, decoder, encoder_optim
     return loss.data[0] / target_length
 
 
+# Get train corpus and word_dict
 train_corpus, _, word_dict = build_corpus()
+
+# Build models, optimizers and load states
 state = load_state()
 step = 1
 if state:
     step = state['step'] + 1
 encoder, decoder = get_model(word_dict.n_words, state=state)
 encoder_optimizer, decoder_optimizer = get_optimizer(encoder, decoder, lr=learning_rate, state=state)
+
+# Define loss function
 criterion = nn.NLLLoss()
 
+# Keep track of time elapsed and running averages
+start = time.time()
+
+# Set configuration for using Tensorboard
+logger = Logger('graphs')
 
 for step in range(step, final_steps + 1):
 
@@ -161,25 +153,10 @@ for step in range(step, final_steps + 1):
     loss = train(input_variable, len_inputs, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion)
 
     # Keep track of loss
-    print_loss_total += loss
-    plot_loss_total += loss
-    # job.record(step, loss)
-
-    if step == 0: continue
+    logger.scalar_summary('loss', loss, step)
 
     if step % print_every == 0:
-        print_loss_avg = print_loss_total / print_every
-        print_loss_total = 0
-        print_summary = '%s: %s (%d %d%%) %.4f' % (step,
-                                                   time_since(start, 1. * step / final_steps), step, step / final_steps * 100, print_loss_avg)
-        print(print_summary)
+        print('%s: %s (%d %d%%)' % (step, time_since(start, 1. * step / final_steps), step, step / final_steps * 100))
 
-        if step % save_every == 0:
-            save_state(encoder, decoder, encoder_optimizer, decoder_optimizer, step)
-
-            # if step % plot_every == 0:
-    #     plot_loss_avg = plot_loss_total / plot_every
-    #     plot_losses.append(plot_loss_avg)
-    #     plot_loss_total = 0
-
-# show_plot(plot_losses)
+    if step % save_every == 0:
+        save_state(encoder, decoder, encoder_optimizer, decoder_optimizer, step)
