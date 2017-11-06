@@ -1,5 +1,5 @@
 # Deep Text Corrector
-
+> Work in Progress
 ## Introduction
 This project aims to make a text corrector for English learners using deep neural net. This project is implemented in Pytorch
 - First trial: seq2seq w/ attention + nucle 2.3 dataset
