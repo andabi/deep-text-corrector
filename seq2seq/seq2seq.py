@@ -113,7 +113,7 @@ class Attn(nn.Module):
         # Calculate energies for each encoder output
         # attn_energies.size() = (B, S)
         for i in range(encoder_outputs_len):
-            attn_energies[:, i] = self.score(hidden, encoder_outputs[:, i])
+            attn_energies[:, i] = self.score(hidden, encoder_outputs[:, i]).squeeze()
             # print attn_energies[:, i]
 
         # Normalize energies to weights in range 0 to 1
